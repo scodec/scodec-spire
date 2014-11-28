@@ -7,7 +7,7 @@ import scala.collection.GenTraversable
 import scalaz.\/-
 import scalaz.syntax.either._
 
-import org.scalacheck.Gen
+import org.scalacheck.{ Arbitrary, Gen }
 import org.scalatest.{Matchers, WordSpec}
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 
@@ -30,4 +30,9 @@ abstract class CodecSuite extends WordSpec with Matchers with GeneratorDrivenPro
   protected def roundtripAll[A](codec: Codec[A], as: GenTraversable[A]) {
     as foreach { a => roundtrip(codec, a) }
   }
+
+  implicit def arbitraryBitVector = Arbitrary(for {
+    bytes <- Gen.listOf(Arbitrary.arbitrary[Byte])
+    mod <- Gen.choose(0, 7)
+  } yield BitVector(bytes).drop(mod))
 }

@@ -54,19 +54,31 @@ package object spire {
   val uint16: Codec[UInt] = codecs.uint16.toUInt
   val uint24: Codec[UInt] = codecs.uint24.toUInt
   val uint32: Codec[UInt] = codecs.int32.toUInt.withToString("32-bit unsigned integer")
+  val uint64: Codec[ULong] = codecs.int64.toULong.withToString("64-bit unsigned integer")
   def uint(bits: Int): Codec[UInt] = {
     require(bits > 0 && bits <= 32)
     if (bits < 32) codecs.uint(bits).toUInt
     else uint32
+  }
+  def ulong(bits: Int): Codec[ULong] = {
+    require(bits > 0 && bits <= 64)
+    if (bits < 64) codecs.ulong(bits).toULong
+    else uint64
   }
 
   val uint8L: Codec[UInt] = codecs.uint8L.toUInt
   val uint16L: Codec[UInt] = codecs.uint16L.toUInt
   val uint24L: Codec[UInt] = codecs.uint24L.toUInt
   val uint32L: Codec[UInt] = codecs.int32L.toUInt.withToString("32-bit unsigned integer")
+  val uint64L: Codec[ULong] = codecs.int64L.toULong.withToString("64-bit unsigned integer")
   def uintL(bits: Int): Codec[UInt] = {
     require(bits > 0 && bits <= 32)
     if (bits < 32) codecs.uintL(bits).toUInt
     else uint32L
+  }
+  def ulongL(bits: Int): Codec[ULong] = {
+    require(bits > 0 && bits <= 64)
+    if (bits < 64) codecs.ulongL(bits).toULong
+    else uint64L
   }
 }

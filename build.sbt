@@ -52,10 +52,10 @@ triggeredMessage := (_ => Watched.clearScreen)
 resolvers += "Sonatype Public" at "https://oss.sonatype.org/content/groups/public/"
 
 libraryDependencies ++= Seq(
-  "org.typelevel" %% "scodec-core" % "1.4.0-SNAPSHOT",
+  "org.typelevel" %% "scodec-core" % "1.6.0-SNAPSHOT",
   "org.spire-math" %% "spire" % "0.8.2",
   "org.scalatest" %% "scalatest" % "2.2.0" % "test",
-  "org.scalacheck" %% "scalacheck" % "1.11.3" % "test"
+  "org.scalacheck" %% "scalacheck" % "1.12.0" % "test"
 )
 
 osgiSettings
