@@ -23,18 +23,18 @@ class UnsignedTest extends CodecSuite {
   "the spire unsigned integer codecs" should {
     "compute same results as equivalent core codecs" in {
       for (size <- 1 to 31) {
-        sameResults(uint(size), codecs.uint(size))(_.toInt)
-        sameResults(uintL(size), codecs.uintL(size))(_.toInt)
+        sameResults(suint(size), codecs.uint(size))(_.toInt)
+        sameResults(suintL(size), codecs.uintL(size))(_.toInt)
       }
-      sameResults(uint(32), codecs.uint32)(_.toLong)
-      sameResults(uintL(32), codecs.uint32L)(_.toLong)
+      sameResults(suint(32), codecs.uint32)(_.toLong)
+      sameResults(suintL(32), codecs.uint32L)(_.toLong)
 
       for (size <- 1 to 63) {
-        sameResults(ulong(size), codecs.ulong(size))(_.toLong)
-        sameResults(ulongL(size), codecs.ulongL(size))(_.toLong)
+        sameResults(sulong(size), codecs.ulong(size))(_.toLong)
+        sameResults(sulongL(size), codecs.ulongL(size))(_.toLong)
       }
-      sameResults(ulong(64), codecs.int64)(_.toLong)
-      sameResults(uint64, codecs.int64)(_.toLong)
+      sameResults(sulong(64), codecs.int64)(_.toLong)
+      sameResults(suint64, codecs.int64)(_.toLong)
     }
   }
 }
