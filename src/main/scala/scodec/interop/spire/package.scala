@@ -40,14 +40,14 @@ package object spire {
   def sushort(bits: Int): Codec[UShort] = {
     require(bits > 0 && bits <= 16)
     if (bits < 16) codecs.ushort(bits).toUShort.withToString(s"$bits-bit unsigned short")
-    else ushort16
+    else sushort16
   }
 
   val sushort16L: Codec[UShort] = codecs.short16L.toUShort.withToString("16-bit unsigned short")
   def sushortL(bits: Int): Codec[UShort] = {
     require(bits > 0 && bits <= 16)
     if (bits < 16) codecs.ushortL(bits).toUShort.withToString(s"$bits-bit unsigned short")
-    else ushort16L
+    else sushort16L
   }
 
   val suint8: Codec[UInt] = codecs.uint8.toUInt
@@ -58,12 +58,12 @@ package object spire {
   def suint(bits: Int): Codec[UInt] = {
     require(bits > 0 && bits <= 32)
     if (bits < 32) codecs.uint(bits).toUInt
-    else uint32
+    else suint32
   }
   def sulong(bits: Int): Codec[ULong] = {
     require(bits > 0 && bits <= 64)
     if (bits < 64) codecs.ulong(bits).toULong
-    else uint64
+    else suint64
   }
 
   val suint8L: Codec[UInt] = codecs.uint8L.toUInt
@@ -74,11 +74,11 @@ package object spire {
   def suintL(bits: Int): Codec[UInt] = {
     require(bits > 0 && bits <= 32)
     if (bits < 32) codecs.uintL(bits).toUInt
-    else uint32L
+    else suint32L
   }
   def sulongL(bits: Int): Codec[ULong] = {
     require(bits > 0 && bits <= 64)
     if (bits < 64) codecs.ulongL(bits).toULong
-    else uint64L
+    else suint64L
   }
 }
