@@ -2,7 +2,6 @@ package scodec
 package interop
 package spire
 
-import scalaz.\/.left
 import _root_.spire.implicits._
 import _root_.spire.math.Interval
 
@@ -24,7 +23,7 @@ class BoundedTest extends CodecSuite {
         val sorted = List(a, b, c).sorted
         if (sorted.head != sorted.tail.head) {
           val interval = Interval(sorted.tail.head, sorted.last)
-          int32.bounded(interval).encode(sorted.head) shouldBe left(Err(s"${sorted.head} not contained by $interval"))
+          int32.bounded(interval).encode(sorted.head) shouldBe Attempt.failure(Err(s"${sorted.head} not contained by $interval"))
         }
       }
     }
@@ -34,8 +33,8 @@ class BoundedTest extends CodecSuite {
         val sorted = List(a, b).sorted
         val interval = Interval(sorted.head, sorted.last)
         if (sorted.last < Int.MaxValue) {
-          val bits = int32.encodeValid(sorted.last + 1)
-          int32.bounded(interval).decode(bits) shouldBe left(Err(s"${sorted.last + 1} not contained by $interval"))
+          val bits = int32.encode(sorted.last + 1).require
+          int32.bounded(interval).decode(bits) shouldBe Attempt.failure(Err(s"${sorted.last + 1} not contained by $interval"))
         }
       }
     }

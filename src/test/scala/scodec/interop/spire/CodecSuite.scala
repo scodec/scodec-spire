@@ -4,9 +4,6 @@ package spire
 
 import scala.collection.GenTraversable
 
-import scalaz.\/-
-import scalaz.syntax.either._
-
 import org.scalacheck.{ Arbitrary, Gen }
 import org.scalatest.{Matchers, WordSpec}
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
@@ -21,8 +18,7 @@ abstract class CodecSuite extends WordSpec with Matchers with GeneratorDrivenPro
 
   protected def roundtrip[A](codec: Codec[A], a: A) {
     val encoded = codec.encode(a)
-    encoded should be ('right)
-    val \/-((remainder, decoded)) = codec.decode(encoded.toOption.get)
+    val Attempt.Successful(DecodeResult(decoded, remainder)) = codec.decode(encoded.toOption.get)
     remainder shouldEqual BitVector.empty
     decoded shouldEqual a
   }

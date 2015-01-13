@@ -6,7 +6,6 @@ import bits.BitVector
 
 import org.scalacheck.Arbitrary
 import Arbitrary.arbitrary
-import scalaz.\/.left
 import _root_.spire.math._
 import _root_.spire.implicits._
 
@@ -14,7 +13,7 @@ class UnsignedTest extends CodecSuite {
 
   def sameResults[U: Arbitrary, A](cu: Codec[U], ca: Codec[A])(toA: U => A) = {
     forAll { (x: U) => cu.encode(x) shouldBe ca.encode(toA(x)) }
-    forAll { (x: BitVector) => cu.decode(x).map { case (rem, u) => (rem, toA(u)) } shouldBe ca.decode(x) }
+    forAll { (x: BitVector) => cu.decode(x).map { _ map toA } shouldBe ca.decode(x) }
   }
 
   implicit val arbitraryUInt: Arbitrary[UInt] = Arbitrary(arbitrary[Int] map UInt.apply)

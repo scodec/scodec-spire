@@ -1,8 +1,6 @@
 package scodec
 package interop
 
-import scalaz.\/
-import \/.{ left, right }
 import _root_.spire.math.{ Interval, UByte, UInt, UShort, ULong }
 
 /**
@@ -26,9 +24,9 @@ package object spire {
      * @param interval interval for which to bound values
      */
     def bounded(interval: Interval[A]): Codec[A] = {
-      def check(a: A): Err \/ A =
-        if (interval contains a) right(a)
-        else left(Err(s"$a not contained by $interval"))
+      def check(a: A) =
+        if (interval contains a) Attempt.successful(a)
+        else Attempt.failure(Err(s"$a not contained by $interval"))
       codec.exmap[A](check, check)
     }
   }
