@@ -10,7 +10,7 @@ contributors += Contributor("mpilquist", "Michael Pilquist")
 rootPackage := "scodec.interop.spire"
 
 libraryDependencies ++= Seq(
-  "org.scodec" %% "scodec-core" % "1.7.0-SNAPSHOT",
+  "org.scodec" %% "scodec-core" % "1.7.0",
   "org.spire-math" %% "spire" % "0.9.0",
   "org.scalatest" %% "scalatest" % "2.2.0" % "test",
   "org.scalacheck" %% "scalacheck" % "1.12.0" % "test"
